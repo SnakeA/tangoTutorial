@@ -1,15 +1,16 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext
 
 
 
 def index(request):
-    context = RequestContext(request)
-    context_dict = {}
-    return render_to_response('index.html', context_dict, context)
+
+    # Construct a dictionary to pass to the template engine as its context.
+    # Note the key boldmessage is the same as {{ boldmessage }} in the template!
+    context_dict = {'boldmessage': "I am bold font from the context"}
+    return render(request,'rango/index.html', context_dict)
 
 def about(request):
-    context = RequestContext(request)
     context_dict = {}
-    return render_to_response('about.html', context_dict, context)
+    return render(request, 'rango/about.html', context_dict )
