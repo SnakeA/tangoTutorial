@@ -1,4 +1,6 @@
 from django.db import models
+from django.template.defaultfilters import slugify
+
 
 # Create your models here.
 #Django creates an ID field for you automatically in each table relating to a model.
@@ -8,6 +10,15 @@ class Category (models.Model):
     name = models.CharField(max_length=128, unique=True)
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+    slug = models.SlugField()
+
+    # Override save function so that name is saved without spaces (slug function)
+    def save(self, *args, **kwargs):
+        # Uncomment if you don't want the slug to change every time the name changes
+        # if self.id is None:
+        #self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
 
     #Like Java's toString() - provides a unicode representation of the model
     def __unicode__(self):
