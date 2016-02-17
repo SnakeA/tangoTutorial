@@ -1,8 +1,11 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
+
 
 
 # Create your models here.
+
 #Django creates an ID field for you automatically in each table relating to a model.
 #You therefore do not need to explicitly define a primary key for each model  its done for you
 
@@ -36,3 +39,17 @@ class Page(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class UserProfile(models.Model):
+    # This line is required. Links UserProfile to a User model instance.
+    user = models.OneToOneField(User)
+
+    # Additional attributes
+    website = models.URLField(blank=True) # allows each of the fields to be blank if necessary
+    picture = models.ImageField(upload_to='profile_images', blank=True) # <workspace>/tango_with_django_project/media/profile_images/
+
+    # Override the unicode() to return something meaningful
+    def __unicode__(self):
+        return self.user.username
+

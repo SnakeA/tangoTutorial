@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rango.models import Category, Page
+from rango.models import Category, Page, UserProfile
 
 
 # This is to override the default "Page" display in the Admin interface
@@ -12,7 +12,12 @@ class CategoryAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Category,CategoryAdmin)
+
 # In order to register the updated interface
 admin.site.register(Page)
+
+# Register the UserPorfile
+admin.site.register(UserProfile)
+
 
 

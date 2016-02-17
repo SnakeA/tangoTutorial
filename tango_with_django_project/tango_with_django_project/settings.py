@@ -31,6 +31,14 @@ TEMPLATE_DIRS = (
 
 ALLOWED_HOSTS = []
 
+# This ensures that @login_required decorators will redirect the user to login page!
+LOGIN_URL = '/rango/login/'
+
+# If custom pass hashes required add them here. Django uses the 1st one ONLY!
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
 
 # Application definition
 
